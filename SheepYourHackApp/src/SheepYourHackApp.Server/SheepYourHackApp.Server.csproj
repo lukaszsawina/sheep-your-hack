@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\staticNextHosting\NextjsStaticHosting.AspNetCore\SheepYourHackHosting.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- Where the Next.js compiled results are stored.
+         This should be the folder that gets generated when you run `npx next export` for your Next.js app. -->
+    <NextJsCompiledOutputPath>$(MSBuildProjectDirectory)\..\ActualNextjsApp.Client\out</NextJsCompiledOutputPath>
+
+    <!-- Relative path where the Next.js compiled results will be published when the Publish target for the current project is called.
+         This will copy the static Next.js app outputs along with this server app so that the files can be served. -->
+    <NextJsOutputPublishRelativePath>clientdist</NextJsOutputPublishRelativePath>
+  </PropertyGroup>
+  <ItemGroup>
+    <_NextjsCustomFiles Include="$(NextJsCompiledOutputPath)\**" />
+    <DotNetPublishFiles Include="@(_NextjsCustomFiles)">
+      <DestinationRelativePath>$(NextJsOutputPublishRelativePath)\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+    </DotNetPublishFiles>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="coverlet.collector" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="FluentAssertions" Version="6.12.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="7.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
+    <PackageReference Include="Moq" Version="4.20.70" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="xunit" Version="2.6.3" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.5.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Yarp.ReverseProxy" Version="2.1.0" />
+  </ItemGroup>
+
+</Project>
